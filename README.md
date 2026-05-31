@@ -33,7 +33,14 @@ Our specific objectives are:
 5. Apply technical skills: Our goal is to successfully use Flutter and Firebase to build a smooth, working app that fulfills all the project requirements for our course.
 
 # 5. Target Users
-[Describe primary and secondary user groups]
+
+NikahReady is designed to provide structured support to users at different stages of their marital journey. 
+
+1. Individuals Preparing for Marriage:
+   - This group consists of young Muslim adults, such as professionals between the ages of 20 and 30, who are actively getting ready for marriage. These users are digitally skilled and seek a unified, easy-to-use platform to manage the spiritual, financial, and logistical aspects of their preparation. By providing a clear roadmap, the application helps these users navigate the complexities of their upcoming transition with confidence and organization.
+     
+2. Newly Married Couples:
+   - This group includes those who have recently entered into marriage and utilize the application to support their new life together. These users leverage the platform as a collaborative tool to maintain household budgets, establish long-term domestic objectives, and continue their personal growth through educational resources on marital rights and responsibilities. This ongoing use reinforces the application's role in fostering stable, well-informed, and harmonious partnerships.
 
 # 6. Features & Functionalities
 * **Checklist & Readiness Score**: [Brief description]
