@@ -109,7 +109,30 @@ understanding of nikah-related fiqh, rights, and responsibilities.
 feedback dialog/snackbar, score result screen with retry and home navigation buttons
 
 # 7. UI Mock-up
-[Include sketches or links to your 5 key screen designs]
+## 7. UI Mock-up
+
+### Screen 1 — Dashboard
+![Dashboard](assets/Dashboard.png)
+
+---
+
+### Screen 2 — Checklist & Readiness Score
+![Checklist](assets/Checklist.png)
+
+---
+
+### Screen 3 — Mahr Calculator
+![Mahr Calculator](assets/Mahr%20Calculator.png)
+
+---
+
+### Screen 4 — Wedding Planner
+![Wedding Planner](assets/wedding%20planner.png)
+
+---
+
+### Screen 5 — Islamic Knowledge Quiz
+![Islamic Quiz](assets/knowledge.png)
 
 # 8. Architecture / Technical Design
 * **State Management**: [e.g., Provider/Bloc]
