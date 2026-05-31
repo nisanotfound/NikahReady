@@ -43,10 +43,70 @@ NikahReady is designed to provide structured support to users at different stage
    - This group includes those who have recently entered into marriage and utilize the application to support their new life together. These users leverage the platform as a collaborative tool to maintain household budgets, establish long-term domestic objectives, and continue their personal growth through educational resources on marital rights and responsibilities. This ongoing use reinforces the application's role in fostering stable, well-informed, and harmonious partnerships.
 
 # 6. Features & Functionalities
-* **Checklist & Readiness Score**: [Brief description]
-* **Mahr Calculator**: [Brief description]
-* **Wedding Planner**: [Brief description]
-* **Islamic Knowledge Quiz**: [Brief description]
+
+## 6.1 Checklist & Readiness Score
+
+**Core Module:** A self-assessment module that evaluates the user's marriage readiness
+across three dimensions — spiritual, financial, and personal.
+
+**Key Interactions:**
+- User ticks off checklist items under each category
+- App calculates and updates a dynamic readiness score (0–100%) in real time
+- Users can add custom checklist items beyond the default list
+- Progress is saved to Firebase Firestore and persists across sessions
+
+**UI Components:** Progress rings per category, checkboxes with labels, score
+summary card, floating action button to add custom tasks
+
+---
+
+## 6.2 Mahr Calculator
+
+**Core Module:** A financial planning tool to help users estimate, plan, and set savings
+goals for mahr in accordance with Islamic guidelines.
+
+**Key Interactions:**
+- User inputs current savings, target mahr amount, and timeline (months)
+- App calculates the required monthly savings to reach the goal
+- Users can save and update their goal over time
+- Brief fiqh notes are displayed to contextualise mahr types
+
+**UI Components:** Input text fields with validators, calculated result card,
+save button, informational tooltip/dialog for fiqh notes
+
+---
+
+## 6.3 Wedding Planner
+
+**Core Module:** An integrated logistics organiser for managing wedding budget,
+vendors, and timeline in a single interface.
+
+**Key Interactions:**
+- User sets a total wedding budget and logs expenses by category
+- Budget balance updates in real time as expenses are added or removed
+- User adds vendor entries (name, contact, service type, status)
+- User sets key date milestones with a countdown to the wedding date
+- Tasks can be marked as complete with due date reminders
+
+**UI Components:** Budget summary card, expense list with category tags,
+vendor directory list, milestone timeline, task checklist with due dates,
+FloatingActionButton for adding entries
+
+---
+
+## 6.4 Islamic Knowledge Quiz
+
+**Core Module:** An interactive educational module for users to learn and test their
+understanding of nikah-related fiqh, rights, and responsibilities.
+
+**Key Interactions:**
+- User selects a quiz topic (e.g., syarat nikah, wali & witnesses, hak suami/isteri)
+- Multiple-choice questions are presented one at a time
+- Immediate feedback with explanation is shown after each answer
+- Score summary and retry option are displayed at the end of each session
+
+**UI Components:** Topic selection screen, question card with answer option buttons,
+feedback dialog/snackbar, score result screen with retry and home navigation buttons
 
 # 7. UI Mock-up
 [Include sketches or links to your 5 key screen designs]
