@@ -47,7 +47,7 @@ NikahReady is designed to provide structured support to users at different stage
 ## 6.1 Checklist & Readiness Score
 
 **Core Module:** A self-assessment module that evaluates the user's marriage readiness
-across three dimensions — spiritual, financial, and personal.
+across three dimensions: spiritual, financial, and personal.
 
 **Key Interactions:**
 - User ticks off checklist items under each category
@@ -100,7 +100,7 @@ FloatingActionButton for adding entries
 understanding of nikah-related fiqh, rights, and responsibilities.
 
 **Key Interactions:**
-- User selects a quiz topic (e.g., syarat nikah, wali & witnesses, hak suami/isteri)
+- User selects a quiz topic (syarat nikah, wali & witnesses, hak suami/isteri)
 - Multiple-choice questions are presented one at a time
 - Immediate feedback with explanation is shown after each answer
 - Score summary and retry option are displayed at the end of each session
