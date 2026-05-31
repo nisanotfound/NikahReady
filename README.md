@@ -22,8 +22,15 @@ Relevance
 The relevance of NikahReady is found in its alignment with the mobile-centric lifestyle of university students and young professionals who prioritize accessibility and efficiency. This application is not only a technical solution but a community-focused resource that addresses the urgent need for accessible fiqh education, financial literacy, and organizational structure in the context of marriage. By aligning all features with Islamic ethical standards, NikahReady provides a reliable, secure, and modern digital space that supports users in achieving spiritual and logistical readiness for their future.
 
 # 4. Objectives
-* [Goal 1: e.g., Automate marriage readiness assessment]
-* [Goal 2: e.g., Streamline financial planning for Mahr]
+
+The main goal of this project is to build a practical mobile app that helps young Muslims prepare for marriage in an organized and stress-free way. 
+
+Our specific objectives are:  
+1. Help users track their readiness: We want to create a simple checklist and "readiness score" to help users see how prepared they are in their spiritual, financial, and personal lives.  
+2. Simplify financial planning: We will build a Mahr calculator so users can easily estimate and plan their financial goals based on what they can afford.
+3. Organize wedding details: We aim to create a digital planner that lets users track their budget, manage their list of vendors, and organize their wedding timeline in one place.
+4. Provide educational tools: We will add a quiz module that helps users learn and test their understanding of important marriage rules (fiqh) and their future rights and responsibilities.
+5. Apply technical skills: Our goal is to successfully use Flutter and Firebase to build a smooth, working app that fulfills all the project requirements for our course.
 
 # 5. Target Users
 [Describe primary and secondary user groups]
