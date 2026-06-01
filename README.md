@@ -184,10 +184,33 @@ Named routes are used for screen navigation, defined in `main.dart`.
 | Cloud Messaging | Push notifications for task reminders and wedding milestone countdowns |
 
 # 9. Data Model
-[Include your Firestore collection-document diagram]
 
 # 10. Flowchart/Sequence Diagram
-[Include your user interaction/navigation flow]
+## 9. Data Model
+
+The app uses **Firebase Firestore** with the following 
+collection-document structure:
+
+### Collections Overview
+
+| Collection | Description |
+|---|---|
+| `users` | Stores user profile and authentication info |
+| `checklist_items` | Stores readiness checklist tasks per user |
+| `mahr_goals` | Stores mahr calculator inputs and results |
+| `vendors` | Stores wedding vendor entries per user |
+| `milestones` | Stores wedding dates, budget, and spending |
+| `quiz_scores` | Stores quiz results and topic history |
+
+### Relationships
+- Each **user** owns their own checklist items, mahr goal, 
+  vendors, milestones, and quiz scores
+- All documents are linked to the user via `uid` (Foreign Key)
+- Data is scoped per user using Firestore security rules
+
+### ERD Diagram
+[insert your screenshot of the diagram here]
+![Data Model](assets/data-model.png)
 
 # 11. References
 * [Flutter Documentation](https://docs.flutter.dev)
