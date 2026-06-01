@@ -178,8 +178,10 @@ Named routes are used for screen navigation, defined in `main.dart`.
 ### Firebase Services Used
 | Service | Usage |
 |---|---|
-| Firebase Authentication | Email/password login and registration |
-| Cloud Firestore | Storing checklist, mahr goals, vendors, and quiz scores |
+| Firebase Authentication | Email/password login and user registration |
+| Cloud Firestore | Storing checklist items, mahr goals, vendor list, and quiz scores |
+| Firebase Storage | Uploading and retrieving vendor photos and user profile pictures |
+| Cloud Messaging | Push notifications for task reminders and wedding milestone countdowns |
 
 # 9. Data Model
 [Include your Firestore collection-document diagram]
