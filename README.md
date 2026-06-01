@@ -185,9 +185,6 @@ Named routes are used for screen navigation, defined in `main.dart`.
 
 # 9. Data Model
 
-# 10. Flowchart/Sequence Diagram
-## 9. Data Model
-
 The app uses **Firebase Firestore** with the following 
 collection-document structure:
 
@@ -210,6 +207,9 @@ collection-document structure:
 
 ### ERD Diagram
 ![Data Model](assets/data-model.png)
+
+# 10. Flowchart/Sequence Diagram
+
 
 # 11. References
 * [Flutter Documentation](https://docs.flutter.dev)
