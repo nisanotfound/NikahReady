@@ -1,6 +1,6 @@
 # 1. Group Members
 * KHAIRUNNISA BINTI ABDULLAH, 2212506, [Assigned Role]
-* [Full Name], [Matric Number], [Assigned Role]
+* NUR ZAFIRAH ADIRA BINTI AHMADZAMANI, 2224316, [Assigned Role]
 * [Full Name], [Matric Number], [Assigned Role]
 * [Full Name], [Matric Number], [Assigned Role]
 
