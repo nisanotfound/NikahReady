@@ -133,10 +133,9 @@ feedback dialog/snackbar, score result screen with retry and home navigation but
 ### Screen 5 — Islamic Knowledge Quiz
 ![Islamic Quiz](assets/knowledge.png)
 
-# 8. Architecture / Technical Design
+## 8. Architecture / Technical Design
 
-* **State Management**:
-
+### State Management
 This application uses the **Provider** package for state management. 
 Provider allows efficient state sharing across widgets without 
 unnecessary rebuilds, keeping the UI reactive and performant.
@@ -148,30 +147,30 @@ Each core module has its own Provider class:
 - `QuizProvider` — manages quiz questions, answers, and score
 
 ### Widget Structure
-The app follows a clean and modular widget structure:
-lib/
-├── main.dart
-├── models/
-│   ├── checklist_model.dart
-│   ├── mahr_model.dart
-│   ├── vendor_model.dart
-│   └── quiz_model.dart
-├── providers/
-│   ├── readiness_provider.dart
-│   ├── mahr_provider.dart
-│   ├── wedding_provider.dart
-│   └── quiz_provider.dart
-├── screens/
-│   ├── dashboard_screen.dart
-│   ├── checklist_screen.dart
-│   ├── mahr_screen.dart
-│   ├── planner_screen.dart
-│   └── quiz_screen.dart
-└── widgets/
-├── readiness_ring.dart
-├── checklist_item.dart
-├── vendor_card.dart
-└── quiz_option.dart
+
+    lib/
+    ├── main.dart
+    ├── models/
+    │   ├── checklist_model.dart
+    │   ├── mahr_model.dart
+    │   ├── vendor_model.dart
+    │   └── quiz_model.dart
+    ├── providers/
+    │   ├── readiness_provider.dart
+    │   ├── mahr_provider.dart
+    │   ├── wedding_provider.dart
+    │   └── quiz_provider.dart
+    ├── screens/
+    │   ├── dashboard_screen.dart
+    │   ├── checklist_screen.dart
+    │   ├── mahr_screen.dart
+    │   ├── planner_screen.dart
+    │   └── quiz_screen.dart
+    └── widgets/
+        ├── readiness_ring.dart
+        ├── checklist_item.dart
+        ├── vendor_card.dart
+        └── quiz_option.dart
 
 ### Navigation
 Named routes are used for screen navigation, defined in `main.dart`.
