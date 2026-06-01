@@ -209,8 +209,7 @@ collection-document structure:
 - Data is scoped per user using Firestore security rules
 
 ### ERD Diagram
-![Data Model]
-(assets/data-model.png)
+![Data Model](assets/data-model.png)
 
 # 11. References
 * [Flutter Documentation](https://docs.flutter.dev)
