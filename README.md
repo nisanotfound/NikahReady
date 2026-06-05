@@ -212,7 +212,7 @@ collection-document structure:
 
 ### User Navigation & Data Flow
 
-![NikahReady Flowchart](assets/<img width="1280" height="684" alt="flowchart" src="https://github.com/user-attachments/assets/85097a9e-e77c-4111-a32c-cd9fa6f8ce3c" />
+(assets/<img width="1280" height="684" alt="flowchart" src="https://github.com/user-attachments/assets/85097a9e-e77c-4111-a32c-cd9fa6f8ce3c" />
 )
 
 **Description:**
