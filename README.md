@@ -210,10 +210,7 @@ collection-document structure:
 
 # 10. Flowchart/Sequence Diagram
 
-### User Navigation & Data Flow
-
-(assets/<img width="1280" height="684" alt="flowchart" src="https://github.com/user-attachments/assets/85097a9e-e77c-4111-a32c-cd9fa6f8ce3c" />
-)
+<img width="1280" height="684" alt="flowchart" src="https://github.com/user-attachments/assets/85097a9e-e77c-4111-a32c-cd9fa6f8ce3c" />
 
 **Description:**
 
