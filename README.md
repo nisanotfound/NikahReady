@@ -209,8 +209,37 @@ collection-document structure:
 ![Data Model](assets/data-model.png)
 
 # 10. Flowchart/Sequence Diagram
+# 10. Flowchart / Sequence Diagram
 
+### User Navigation & Data Flow
+
+![NikahReady Flowchart](assets/flowchart.png)
+
+**Description:**
+
+This flowchart illustrates:
+
+- **User navigation**: How users navigate between the five main screens (Dashboard, Checklist, Mahr Calculator, Wedding Planner, Islamic Quiz)
+- **Data flow**: Real-time synchronization between the app and Firebase Firestore
+- **Firebase integration**: Shows how user data is stored in six main collections:
+  - Checklist Items (spiritual, financial, personal tasks)
+  - Mahr Goals (savings targets and calculations)
+  - Wedding Data (budget, vendors, milestones)
+  - Quiz Scores (learning history and results)
+  - User Profile (authentication and preferences)
+
+**Firebase Services Used:**
+- **Authentication**: Email/password login and user registration
+- **Cloud Firestore**: Real-time database for all user data
+- **Cloud Messaging**: Push notifications for reminders and milestones
+
+All user actions (adding items, saving progress, completing quizzes) trigger real-time updates to Firebase, which are immediately reflected in the app UI through the Provider state management system.
 
 # 11. References
-* [Flutter Documentation](https://docs.flutter.dev)
-* [Firebase Documentation](https://firebase.google.com/docs)
+
+- Flutter Documentation. (n.d.). Flutter.dev. https://docs.flutter.dev
+- Firebase Documentation. (n.d.). Firebase. https://firebase.google.com/docs
+- Google. (n.d.). Material Design 3. https://m3.material.io
+- Provider Documentation. (n.d.). pub.dev. https://pub.dev/packages/provider
+- Cloud Firestore Documentation. (n.d.). Firebase. 
+  https://firebase.google.com/docs/firestore
