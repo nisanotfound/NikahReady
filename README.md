@@ -1,8 +1,8 @@
 # 1. Group Members
-* KHAIRUNNISA BINTI ABDULLAH, 2212506, [Assigned Role]
-* NUR ZAFIRAH ADIRA BINTI AHMADZAMANI, 2224316, [Assigned Role]
-* NUR IZZAH NABIHAH BINTI MOHD SALLEH, 2216522, [Assigned Role]
-* [Full Name], [Matric Number], [Assigned Role]
+* KHAIRUNNISA BINTI ABDULLAH, 2212506, [Checklist & Readiness Score]
+* NUR ZAFIRAH ADIRA BINTI AHMADZAMANI, 2224316, [Mahr Calculator]
+* NUR IZZAH NABIHAH BINTI MOHD SALLEH, 2216522, [Wedding Planner]
+* [Full Name], [Matric Number], [Islamic Knowledge Quiz]
 
 # 2. Project Title
 NikahReady: A Shariah-compliant Marriage Preparation App
