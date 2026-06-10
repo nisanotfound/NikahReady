@@ -2,7 +2,7 @@
 * KHAIRUNNISA BINTI ABDULLAH, 2212506, [Checklist & Readiness Score]
 * NUR ZAFIRAH ADIRA BINTI AHMADZAMANI, 2224316, [Mahr Calculator]
 * NUR IZZAH NABIHAH BINTI MOHD SALLEH, 2216522, [Wedding Planner]
-* [Full Name], [Matric Number], [Islamic Knowledge Quiz]
+* UMMUL KHAIRINA BINTI ABD HAMID, 2227992, [Islamic Knowledge Quiz]
 
 # 2. Project Title
 NikahReady: A Shariah-compliant Marriage Preparation App
