@@ -12,6 +12,22 @@ class SettingsScreen extends StatelessWidget {
     // Mengambil data user yang sedang login
     final User? user = FirebaseAuth.instance.currentUser;
 
+    // --- LOGIK NAMA YANG LEBIH KEBAL ---
+    String displayUserName = "NikahReady User"; 
+    
+    if (user != null) {
+      if (user.displayName != null && 
+          user.displayName!.trim().isNotEmpty && 
+          user.displayName != "NikahReady User") {
+        // Jika ada nama yang betul-betul sah dari Firebase
+        displayUserName = user.displayName!;
+      } else if (user.email != null && user.email!.isNotEmpty) {
+        // Jika tiada nama atau namanya masih default, paksa ambil dari e-mel
+        displayUserName = user.email!.split('@')[0];
+      }
+    }
+    // -----------------------------------
+
     return Scaffold(
       backgroundColor: const Color(0xFFFDFBFD),
       appBar: AppBar(
@@ -40,9 +56,9 @@ class SettingsScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Nama User dari Firebase
+                      // Panggil pembolehubah displayUserName yang kita dah tapis di atas
                       Text(
-                        user?.displayName ?? "NikahReady User", 
+                        displayUserName, 
                         style: GoogleFonts.poppins(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xFF2C1B4D))
                       ),
                       // Emel User dari Firebase
@@ -91,7 +107,7 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  // --- Widget helper di bawah kekal sama ---
+  // --- Widget helper ---
   Widget _buildSectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, bottom: 8),
