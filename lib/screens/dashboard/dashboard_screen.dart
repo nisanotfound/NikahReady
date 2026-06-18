@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'settings_screen.dart'; 
 import '../mahr/mahr_screen.dart';
 import '../checklist/checklist_screen.dart';
+import '../quiz_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -12,7 +13,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int _selectedIndex = 2; // Mula dengan tab Home (indeks 2)
+  int _selectedIndex = 2;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -26,7 +27,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       case 1: return const MahrScreen();
       case 2: return _buildMainDashboard();
       case 3: return const Center(child: Text("Plan (Akan Datang)"));
-      case 4: return const Center(child: Text("Quiz (Akan Datang)"));
+      case 4: return const QuizScreen();
       default: return _buildMainDashboard();
     }
   }
