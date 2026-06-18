@@ -49,7 +49,7 @@ class QuizResult {
     if (score >= 90) return 'Mumtaz (Excellent)';
     if (score >= 70) return 'Jayyid Jiddan (Very Good)';
     if (score >= 50) return 'Jayyid (Good)';
-    return 'Perlu Peningkatan (Needs Improvement)';
+    return 'Needs Improvement';
   }
 }
 
@@ -58,182 +58,182 @@ class QuizResult {
 final List<QuizTopic> quizTopics = [
   QuizTopic(
     id: 'syarat_nikah',
-    title: 'Syarat Nikah',
-    subtitle: 'Rukun & syarat sah perkahwinan',
+    title: 'Conditions of Nikah',
+    subtitle: 'Pillars & validity conditions of marriage',
     icon: '📜',
     questions: [
       QuizQuestion(
-        question: 'Berapakah bilangan rukun nikah yang wajib dipenuhi dalam Islam?',
-        options: ['3 rukun', '4 rukun', '5 rukun', '6 rukun'],
+        question: 'How many pillars (rukun) of nikah are obligatory to fulfil in Islam?',
+        options: ['3 pillars', '4 pillars', '5 pillars', '6 pillars'],
         correctIndex: 2,
         explanation:
-            'Terdapat 5 rukun nikah: calon suami, calon isteri, wali, dua orang saksi, dan ijab qabul. Kesemua rukun ini mesti dipenuhi untuk sah sesuatu akad nikah.',
+            'There are 5 pillars of nikah: the groom, the bride, the wali (guardian), two witnesses, and the ijab-qabul (offer and acceptance). All five must be present for the marriage contract to be valid.',
       ),
       QuizQuestion(
-        question: 'Apakah syarat utama bagi calon isteri dalam akad nikah?',
+        question: 'What is the primary condition for the bride in a marriage contract?',
         options: [
-          'Mesti berumur 18 tahun ke atas',
-          'Mesti seorang Islam, bukan mahram, dan tidak dalam iddah',
-          'Mesti mendapat kebenaran majikan',
-          'Mesti memiliki harta sendiri',
+          'She must be at least 18 years old',
+          'She must be Muslim, not a mahram, and not in the iddah period',
+          'She must obtain permission from her employer',
+          'She must own her own property',
         ],
         correctIndex: 1,
         explanation:
-            'Calon isteri mestilah seorang Islam, bukan mahram kepada calon suami, dan tidak sedang dalam tempoh iddah perkahwinan terdahulu.',
+            'The bride must be a Muslim, must not be a mahram (forbidden relative) to the groom, and must not currently be in an iddah (waiting period) from a previous marriage.',
       ),
       QuizQuestion(
-        question: 'Siapakah yang tidak boleh menjadi wali nikah?',
+        question: 'Who is NOT eligible to act as a wali (marriage guardian)?',
         options: [
-          'Bapa kandung',
-          'Datuk sebelah bapa',
-          'Abang kandung',
-          'Bapa saudara sebelah ibu',
+          'Biological father',
+          'Paternal grandfather',
+          'Full brother',
+          'Maternal uncle',
         ],
         correctIndex: 3,
         explanation:
-            'Wali nikah hanya boleh dari kalangan keluarga sebelah bapa (nasab patrilineal). Bapa saudara sebelah ibu tidak termasuk dalam urutan wali nikah.',
+            'The wali of nikah must come from the paternal lineage (nasab patrilineal). A maternal uncle is not included in the order of wali because he is from the mother\'s side.',
       ),
       QuizQuestion(
-        question: 'Apakah yang dimaksudkan dengan "ijab" dalam akad nikah?',
+        question: 'What does "ijab" refer to in the marriage contract?',
         options: [
-          'Ucapan penerimaan oleh pengantin lelaki',
-          'Ucapan penyerahan oleh wali pihak perempuan',
-          'Doa yang dibaca oleh imam',
-          'Pemberian mas kahwin',
+          'The acceptance statement by the groom',
+          'The offer statement by the bride\'s guardian',
+          'The prayer recited by the imam',
+          'The giving of the mahr (dowry)',
         ],
         correctIndex: 1,
         explanation:
-            'Ijab ialah lafaz yang diucapkan oleh wali pihak perempuan untuk menyerahkan/menawarkan perkahwinan. Qabul pula ialah lafaz penerimaan oleh pengantin lelaki.',
+            'Ijab is the offer statement made by the bride\'s wali (guardian) to initiate the marriage contract. Qabul is the groom\'s acceptance statement that follows.',
       ),
       QuizQuestion(
-        question: 'Berapakah bilangan minimum saksi yang diperlukan untuk sah akad nikah?',
-        options: ['1 orang', '2 orang', '3 orang', '4 orang'],
+        question: 'What is the minimum number of witnesses required for a valid nikah?',
+        options: ['1 witness', '2 witnesses', '3 witnesses', '4 witnesses'],
         correctIndex: 1,
         explanation:
-            'Akad nikah memerlukan sekurang-kurangnya 2 orang saksi lelaki yang Islam, baligh, berakal, dan adil. Tanpa saksi, akad nikah tidak sah.',
+            'A nikah requires at least 2 male witnesses who are Muslim, of adult age, of sound mind, and of upright character (adil). Without witnesses, the marriage contract is invalid.',
       ),
     ],
   ),
 
   QuizTopic(
     id: 'wali_saksi',
-    title: 'Wali & Saksi',
-    subtitle: 'Peranan wali dan syarat saksi',
+    title: 'Wali & Witnesses',
+    subtitle: 'Role of the guardian and witness conditions',
     icon: '🤝',
     questions: [
       QuizQuestion(
-        question: 'Apakah urutan wali yang pertama sekali dalam perkahwinan Islam?',
-        options: ['Datuk', 'Bapa', 'Abang', 'Hakim'],
+        question: 'Who is the first in the order of wali (guardian) in an Islamic marriage?',
+        options: ['Grandfather', 'Father', 'Elder brother', 'Judge (Hakim)'],
         correctIndex: 1,
         explanation:
-            'Bapa kandung ialah wali yang paling utama (wali aqrab). Urutan selepasnya: datuk sebelah bapa, abang/adik lelaki, bapa saudara sebelah bapa, dan seterusnya.',
+            'The biological father is the primary wali (wali aqrab). The order after him is: paternal grandfather, full brothers, paternal uncles, and so on through the paternal line.',
       ),
       QuizQuestion(
-        question: 'Bilakah wali hakim boleh menggantikan wali nasab?',
+        question: 'When can a wali hakim (judge) substitute the wali nasab (blood guardian)?',
         options: [
-          'Apabila wali nasab meminta bayaran',
-          'Apabila wali nasab tiada, enggan, atau tidak layak',
-          'Apabila pengantin perempuan tidak suka wali nasab',
-          'Apabila majlis diadakan di luar negara',
+          'When the wali nasab demands payment',
+          'When the wali nasab is absent, refuses, or is unqualified',
+          'When the bride dislikes her wali nasab',
+          'When the ceremony is held abroad',
         ],
         correctIndex: 1,
         explanation:
-            'Wali hakim (biasanya Kadi) boleh bertindak sebagai wali apabila wali nasab tiada, telah meninggal dunia, enggan berkerjasama tanpa sebab munasabah (adhal), atau tidak memenuhi syarat menjadi wali.',
+            'A wali hakim (typically the Qadi/judge) may act as wali when the wali nasab is deceased, absent, refuses without valid reason (adhal), or does not meet the conditions to serve as wali.',
       ),
       QuizQuestion(
-        question: 'Apakah syarat yang TIDAK diperlukan daripada saksi nikah?',
-        options: ['Islam', 'Baligh', 'Lelaki', 'Bujang'],
+        question: 'Which condition is NOT required of a nikah witness?',
+        options: ['Muslim', 'Adult (baligh)', 'Male', 'Unmarried'],
         correctIndex: 3,
         explanation:
-            'Syarat saksi nikah ialah Islam, baligh, berakal, lelaki, merdeka, dan adil. Status perkahwinan (bujang atau sudah berkahwin) tidak menjadi syarat.',
+            'The conditions for a nikah witness are: Muslim, adult (baligh), of sound mind (berakal), male, free, and of upright character (adil). Marital status — whether single or married — is not a condition.',
       ),
       QuizQuestion(
-        question: 'Apakah hukum nikah tanpa kebenaran wali bagi perempuan yang mempunyai wali?',
+        question: 'What is the ruling on a nikah conducted without the consent of the wali for a woman who has a wali?',
         options: [
-          'Sah tetapi makruh',
-          'Sah dengan syarat tertentu',
-          'Tidak sah (batal)',
-          'Hukumnya bergantung kepada negeri',
+          'Valid but disliked (makruh)',
+          'Valid under certain conditions',
+          'Invalid (void)',
+          'Depends on the state\'s ruling',
         ],
         correctIndex: 2,
         explanation:
-            'Mengikut mazhab Syafii (yang dipakai di Malaysia), nikah tanpa wali adalah tidak sah dan batal. Ini berdasarkan hadis: "Tidak sah nikah melainkan dengan wali."',
+            'According to the Shafi\'i school (practised in Malaysia), a nikah conducted without a wali is invalid and void. This is based on the hadith: "There is no nikah except with a wali."',
       ),
       QuizQuestion(
-        question: 'Adakah seorang perempuan boleh menjadi saksi dalam akad nikah?',
+        question: 'Can a woman serve as a witness in a nikah contract?',
         options: [
-          'Ya, boleh sepenuhnya',
-          'Ya, jika tiada saksi lelaki',
-          'Tidak, saksi mesti lelaki',
-          'Ya, jika mendapat kebenaran kadi',
+          'Yes, fully permitted',
+          'Yes, if no male witnesses are available',
+          'No, witnesses must be male',
+          'Yes, with the permission of the Qadi',
         ],
         correctIndex: 2,
         explanation:
-            'Mengikut mazhab Syafii, saksi nikah mestilah terdiri daripada lelaki. Wanita tidak boleh menjadi saksi dalam akad nikah walaupun dalam keadaan darurat.',
+            'According to the Shafi\'i school, nikah witnesses must be male. Women are not permitted to serve as witnesses in the marriage contract, even in exceptional circumstances.',
       ),
     ],
   ),
 
   QuizTopic(
     id: 'hak_suami_isteri',
-    title: 'Hak Suami & Isteri',
-    subtitle: 'Hak & tanggungjawab selepas berkahwin',
+    title: 'Rights of Husband & Wife',
+    subtitle: 'Rights & responsibilities after marriage',
     icon: '⚖️',
     questions: [
       QuizQuestion(
-        question: 'Apakah kewajipan utama suami terhadap isteri dari segi kewangan?',
+        question: 'What is the primary financial obligation of a husband towards his wife?',
         options: [
-          'Memberi mas kahwin sahaja',
-          'Membayar nafkah (makan, pakai, tempat tinggal)',
-          'Membuka akaun bank bersama',
-          'Membayar semua hutang isteri',
+          'To give the mahr only',
+          'To provide nafaqah (food, clothing, and shelter)',
+          'To open a joint bank account',
+          'To pay all of his wife\'s debts',
         ],
         correctIndex: 1,
         explanation:
-            'Suami wajib memberi nafkah kepada isteri merangkumi keperluan makanan, pakaian, dan tempat tinggal yang bersesuaian dengan kemampuan suami. Ini adalah hak isteri yang dijamin oleh syarak.',
+            'A husband is obligated to provide nafaqah to his wife, which includes the basic needs of food, clothing, and appropriate housing according to his financial capability. This is a right guaranteed to the wife by Islamic law.',
       ),
       QuizQuestion(
-        question: 'Apakah hak isteri berkenaan mas kahwin (mahr)?',
+        question: 'What is the wife\'s right regarding the mahr (dowry)?',
         options: [
-          'Mas kahwin hanya perlu dibayar jika isteri meminta',
-          'Mas kahwin adalah hak mutlak isteri dan menjadi miliknya sepenuhnya',
-          'Mas kahwin boleh diambil semula oleh suami jika berlaku perceraian',
-          'Mas kahwin hanya simbol dan tidak wajib dibayar',
+          'The mahr only needs to be paid if the wife requests it',
+          'The mahr is the wife\'s absolute right and becomes her sole property',
+          'The husband may reclaim the mahr in the event of divorce',
+          'The mahr is merely symbolic and not obligatory',
         ],
         correctIndex: 1,
         explanation:
-            'Mas kahwin (mahr) adalah hak mutlak isteri. Ia menjadi milik isteri sepenuhnya dan tidak boleh diambil semula oleh suami melainkan isteri menghadiahkannya dengan rela hati.',
+            'The mahr is the wife\'s absolute right and becomes her full personal property upon marriage. The husband cannot reclaim it unless the wife voluntarily gifts it back to him.',
       ),
       QuizQuestion(
-        question: 'Apakah hak suami yang wajib ditaati oleh isteri?',
+        question: 'What is the husband\'s right that the wife is obligated to uphold?',
         options: [
-          'Isteri wajib bekerja untuk membantu kewangan keluarga',
-          'Isteri wajib taat dalam perkara yang tidak melanggar hukum syarak',
-          'Isteri wajib tinggal bersama keluarga suami',
-          'Isteri wajib menyerahkan semua harta kepada suami',
+          'The wife must work to support the family financially',
+          'The wife must obey in matters that do not contradict Islamic law',
+          'The wife must live with the husband\'s family',
+          'The wife must surrender all her wealth to the husband',
         ],
         correctIndex: 1,
         explanation:
-            'Isteri wajib taat kepada suami dalam perkara yang tidak bertentangan dengan hukum Allah. Ketaatan ini tidak meliputi perkara maksiat atau yang memudaratkan diri isteri.',
+            'The wife is obligated to obey her husband in matters that do not contradict the commands of Allah. This obedience does not extend to sinful acts or anything that causes harm to the wife.',
       ),
       QuizQuestion(
-        question: 'Berapakah tempoh iddah bagi isteri yang diceraikan dan belum hamil?',
-        options: ['1 bulan', '2 bulan', '3 kali suci (quru\')', '6 bulan'],
+        question: 'What is the iddah period for a divorced wife who is not pregnant?',
+        options: ['1 month', '2 months', '3 menstrual cycles (quru\')', '6 months'],
         correctIndex: 2,
         explanation:
-            'Tempoh iddah bagi isteri yang diceraikan dan tidak hamil ialah 3 kali suci (quru\'). Ini memberi masa untuk memastikan tiada kehamilan dan memberi peluang rujuk.',
+            'The iddah for a divorced wife who is not pregnant is 3 menstrual cycles (quru\'). This period ensures there is no pregnancy and also provides an opportunity for reconciliation (rujuk).',
       ),
       QuizQuestion(
-        question: 'Apakah hak isteri untuk mendapatkan cerai jika suami gagal memberi nafkah?',
+        question: 'What right does a wife have if her husband fails to provide nafaqah?',
         options: [
-          'Isteri tiada hak untuk menuntut cerai atas alasan ini',
-          'Isteri boleh menuntut fasakh melalui mahkamah syariah',
-          'Isteri mesti tunggu 3 tahun sebelum boleh menuntut cerai',
-          'Isteri hanya boleh mendapat khul\' dengan mengembalikan mas kahwin',
+          'The wife has no right to seek divorce on this ground',
+          'The wife may apply for fasakh through the Syariah court',
+          'The wife must wait 3 years before she can apply for divorce',
+          'The wife may only obtain khul\' by returning the mahr',
         ],
         correctIndex: 1,
         explanation:
-            'Jika suami gagal memberi nafkah tanpa sebab yang sah, isteri berhak menuntut fasakh (pembubaran nikah) melalui mahkamah syariah. Ini adalah hak perlindungan yang diberikan oleh undang-undang Islam.',
+            'If a husband fails to provide nafaqah without a valid reason, the wife has the right to apply for fasakh (dissolution of marriage) through the Syariah court. This is a protective right granted under Islamic law.',
       ),
     ],
   ),

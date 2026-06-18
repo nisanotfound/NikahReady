@@ -52,7 +52,7 @@ class _QuizScreenBody extends StatelessWidget {
           },
         ),
         title: const Text(
-          'Kuiz Fiqh Nikah',
+          'Fiqh Quiz',
           style: TextStyle(
             color: _kTextDark,
             fontWeight: FontWeight.w700,
@@ -88,17 +88,17 @@ class _QuizScreenBody extends StatelessWidget {
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Keluar Kuiz?'),
-        content: const Text('Kemajuan anda dalam kuiz ini tidak akan disimpan.'),
+        title: const Text('Exit from Quiz?'),
+        content: const Text('Your progress in this quiz will not be saved'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('Teruskan', style: TextStyle(color: _kPrimary)),
+            child: const Text('Continue', style: TextStyle(color: _kPrimary)),
           ),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: _kPrimary),
             onPressed: () => Navigator.pop(ctx, true),
-            child: const Text('Keluar'),
+            child: const Text('Exit'),
           ),
         ],
       ),
@@ -139,7 +139,7 @@ class _TopicSelectView extends StatelessWidget {
                 const Text('📚', style: TextStyle(fontSize: 32)),
                 const SizedBox(height: 10),
                 const Text(
-                  'Uji Pengetahuan\nFiqh Anda',
+                  'Test Your\nFiqh Knowledges',
                   style: TextStyle(
                     color: _kOnPrimary,
                     fontSize: 22,
@@ -149,7 +149,7 @@ class _TopicSelectView extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  'Pilih topik di bawah untuk memulakan kuiz.',
+                  'Select one of the topics below to start the quiz',
                   style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.85),
                     fontSize: 13.5,
@@ -160,7 +160,7 @@ class _TopicSelectView extends StatelessWidget {
           ),
           const SizedBox(height: 28),
           const Text(
-            'Pilih Topik',
+            'Choose Topic',
             style: TextStyle(
               color: _kTextDark,
               fontSize: 16,
@@ -236,7 +236,7 @@ class _TopicCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    '${topic.questions.length} soalan',
+                    '${topic.questions.length} questions',
                     style: const TextStyle(
                       color: _kPrimary,
                       fontSize: 12,
@@ -282,7 +282,7 @@ class _QuestionView extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Soalan ${provider.currentIndex + 1} / ${provider.totalQuestions}',
+                'Question ${provider.currentIndex + 1} / ${provider.totalQuestions}',
                 style: const TextStyle(
                   color: _kTextMid,
                   fontSize: 13,
@@ -413,7 +413,7 @@ class _FeedbackPanel extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                isCorrect ? 'Betul! Tahniah 🎉' : 'Jawapan Tidak Tepat',
+                isCorrect ? 'Correct! Congratulations' : 'Your answer is wrong',
                 style: TextStyle(
                   color: iconColor,
                   fontWeight: FontWeight.w700,
@@ -444,7 +444,7 @@ class _FeedbackPanel extends StatelessWidget {
               ),
               onPressed: onNext,
               child: Text(
-                isLastQuestion ? 'Lihat Keputusan' : 'Soalan Seterusnya →',
+                isLastQuestion ? 'View Results' : 'Next Question →',
                 style: const TextStyle(
                   fontSize: 14.5,
                   fontWeight: FontWeight.w700,
@@ -517,7 +517,7 @@ class _ResultView extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${result.correctAnswers} / ${result.totalQuestions} jawapan betul',
+                  '${result.correctAnswers} / ${result.totalQuestions} correct answers',
                   style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.75),
                     fontSize: 13.5,
@@ -533,21 +533,21 @@ class _ResultView extends StatelessWidget {
             children: [
               _StatChip(
                 icon: Icons.check_circle_rounded,
-                label: 'Betul',
+                label: 'Correct',
                 value: '${result.correctAnswers}',
                 color: const Color(0xFF2E7D32),
               ),
               const SizedBox(width: 10),
               _StatChip(
                 icon: Icons.cancel_rounded,
-                label: 'Salah',
+                label: 'Wrong',
                 value: '${result.totalQuestions - result.correctAnswers}',
                 color: const Color(0xFFC62828),
               ),
               const SizedBox(width: 10),
               _StatChip(
                 icon: Icons.quiz_rounded,
-                label: 'Soalan',
+                label: 'Questions',
                 value: '${result.totalQuestions}',
                 color: _kPrimary,
               ),
@@ -572,7 +572,7 @@ class _ResultView extends StatelessWidget {
                   ),
                   SizedBox(width: 8),
                   Text(
-                    'Menyimpan keputusan...',
+                    'Saving the results ...',
                     style: TextStyle(color: _kTextMid, fontSize: 13),
                   ),
                 ],
@@ -592,7 +592,7 @@ class _ResultView extends StatelessWidget {
               ),
               icon: const Icon(Icons.refresh_rounded),
               label: const Text(
-                'Cuba Semula',
+                'Try Again',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
               ),
               onPressed: provider.retryQuiz,
@@ -614,7 +614,7 @@ class _ResultView extends StatelessWidget {
               ),
               icon: const Icon(Icons.grid_view_rounded),
               label: const Text(
-                'Pilih Topik Lain',
+                'Choose Another Topic',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
               ),
               onPressed: provider.resetToTopicSelect,
@@ -632,7 +632,7 @@ class _ResultView extends StatelessWidget {
               ),
               icon: const Icon(Icons.home_rounded),
               label: const Text(
-                'Kembali ke Utama',
+                'Return to Home',
                 style: TextStyle(fontSize: 14),
               ),
               onPressed: () => Navigator.popUntil(context, (r) => r.isFirst),
