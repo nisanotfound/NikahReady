@@ -50,7 +50,7 @@ class BudgetSummaryCard extends StatelessWidget {
               child: LinearProgressIndicator(
                 value: usedFraction.toDouble(),
                 minHeight: 10,
-                backgroundColor: theme.colorScheme.surfaceVariant,
+                backgroundColor: theme.colorScheme.surfaceContainerHighest,
                 color: overBudget ? theme.colorScheme.error : theme.colorScheme.primary,
               ),
             ),

@@ -59,7 +59,7 @@ Future<ExpenseDraft?> showAddExpenseDialog(BuildContext context) {
             mainAxisSize: MainAxisSize.min,
             children: [
               DropdownButtonFormField<String>(
-                value: category,
+                initialValue: category,
                 decoration: const InputDecoration(labelText: 'Category'),
                 items: expenseCategories
                     .map((c) => DropdownMenuItem(value: c, child: Text(c)))
@@ -202,7 +202,7 @@ Future<Map<String, String>?> showAddGuestDialog(BuildContext context) {
               ),
               const SizedBox(height: 12),
               DropdownButtonFormField<String>(
-                value: status,
+                initialValue: status,
                 decoration: const InputDecoration(labelText: 'RSVP Status'),
                 items: ['Confirmed', 'Pending', 'Declined']
                     .map((s) => DropdownMenuItem(value: s, child: Text(s)))

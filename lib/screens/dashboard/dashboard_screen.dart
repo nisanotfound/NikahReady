@@ -5,6 +5,7 @@ import 'settings_screen.dart';
 import '../mahr/mahr_screen.dart';
 import '../checklist/checklist_screen.dart';
 import '../quiz_screen.dart';
+import '../planner_screen.dart'; // <-- 1. Import Planner ditambah di sini
 import '../../services/wedding_provider.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       case 0: return const ChecklistScreen();
       case 1: return const MahrScreen();
       case 2: return _buildMainDashboard();
-      case 3: return const Center(child: Text("Plan (Akan Datang)"));
+      case 3: return const PlannerScreen(); // <-- 2. Class Planner dipanggil di sini
       case 4: return const QuizScreen();
       default: return _buildMainDashboard();
     }
@@ -213,7 +214,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: Column(
         children: [
           Text(value, style: GoogleFonts.playfairDisplay(fontSize: 32, fontWeight: FontWeight.bold, color: textColor)), 
-          Text(label, style: GoogleFonts.poppins(fontSize: 14, color: textColor.withOpacity(0.8)))
+          Text(label, style: GoogleFonts.poppins(fontSize: 14, color: textColor.withValues(alpha: 0.8))) // <-- 3. Dibetulkan (withValues)
         ],
       ),
     );
@@ -224,7 +225,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(24), boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 15, offset: const Offset(0, 8))]),
+        decoration: BoxDecoration(
+          color: Colors.white, 
+          borderRadius: BorderRadius.circular(24), 
+          boxShadow: [
+            BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 15, offset: const Offset(0, 8)) // <-- 3. Dibetulkan (withValues)
+          ]
+        ),
         child: Row(
           children: [
             Container(padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: iconBg, shape: BoxShape.circle), child: Icon(icon, color: const Color(0xFF2C1B4D), size: 22)),
