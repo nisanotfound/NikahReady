@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'settings_screen.dart'; 
 import '../mahr/mahr_screen.dart';
 import '../checklist/checklist_screen.dart';
 import '../quiz_screen.dart';
+import '../../services/wedding_provider.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -101,7 +101,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget _buildMainDashboard() {
-    // Read live values from the root stream wedding provider safely
     final weddingProvider = context.watch<WeddingProvider>();
     final daysLeft = weddingProvider.daysUntilWedding;
     final countdownText = daysLeft != null ? "${daysLeft}d" : "42d";
@@ -170,7 +169,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   children: [
                     Expanded(child: _statBox("71%", "Personal", const Color(0xFFF1F9FE), const Color(0xFF3886A9))), 
                     const SizedBox(width: 16), 
-                    // Dynamic metric countdown box bound to your Firestore instance
                     Expanded(child: _statBox(countdownText, "To nikah", const Color(0xFFF1FEF4), const Color(0xFF257545)))
                   ],
                 ),

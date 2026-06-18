@@ -188,7 +188,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> {
               ),
               const SizedBox(height: 14),
               DropdownButtonFormField<String>(
-                value: selectedCategory,
+                initialValue: selectedCategory,
                 decoration: InputDecoration(
                   labelText: "Category",
                   labelStyle: GoogleFonts.poppins(fontSize: 13),
