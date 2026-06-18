@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
 import 'settings_screen.dart'; 
 import '../mahr/mahr_screen.dart';
 import '../checklist/checklist_screen.dart';
@@ -99,6 +101,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget _buildMainDashboard() {
+    // Read live values from the root stream wedding provider safely
+    final weddingProvider = context.watch<WeddingProvider>();
+    final daysLeft = weddingProvider.daysUntilWedding;
+    final countdownText = daysLeft != null ? "${daysLeft}d" : "42d";
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,9 +158,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
-                Row(children: [Expanded(child: _statBox("80%", "Spiritual", const Color(0xFFF1F1FE), const Color(0xFF5C4E9A))), const SizedBox(width: 16), Expanded(child: _statBox("65%", "Financial", const Color(0xFFFFF2F2), const Color(0xFFA95C5C)))]),
+                Row(
+                  children: [
+                    Expanded(child: _statBox("80%", "Spiritual", const Color(0xFFF1F1FE), const Color(0xFF5C4E9A))), 
+                    const SizedBox(width: 16), 
+                    Expanded(child: _statBox("65%", "Financial", const Color(0xFFFFF2F2), const Color(0xFFA95C5C)))
+                  ],
+                ),
                 const SizedBox(height: 16),
-                Row(children: [Expanded(child: _statBox("71%", "Personal", const Color(0xFFF1F9FE), const Color(0xFF3886A9))), const SizedBox(width: 16), Expanded(child: _statBox("42d", "To nikah", const Color(0xFFF1FEF4), const Color(0xFF257545)))]),
+                Row(
+                  children: [
+                    Expanded(child: _statBox("71%", "Personal", const Color(0xFFF1F9FE), const Color(0xFF3886A9))), 
+                    const SizedBox(width: 16), 
+                    // Dynamic metric countdown box bound to your Firestore instance
+                    Expanded(child: _statBox(countdownText, "To nikah", const Color(0xFFF1FEF4), const Color(0xFF257545)))
+                  ],
+                ),
               ],
             ),
           ),
@@ -164,9 +184,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
-                _actionRow(icon: Icons.checklist_rounded, title: "My checklist", subtitle: "3 tasks left", iconBg: const Color(0xFFF1F1FE), onTap: () => _onItemTapped(0)),
+                _actionRow(
+                  icon: Icons.checklist_rounded, 
+                  title: "My checklist", 
+                  subtitle: "${weddingProvider.tasks.where((t) => !t.isCompleted).length} tasks left", 
+                  iconBg: const Color(0xFFF1F1FE), 
+                  onTap: () => _onItemTapped(0),
+                ),
                 const SizedBox(height: 16),
-                _actionRow(icon: Icons.menu_book_rounded, title: "Today's quiz", subtitle: "Syarat nikah", iconBg: const Color(0xFFFFF2F2), onTap: () => _onItemTapped(4)),
+                _actionRow(
+                  icon: Icons.menu_book_rounded, 
+                  title: "Today's quiz", 
+                  subtitle: "Marriage conditions", 
+                  iconBg: const Color(0xFFFFF2F2), 
+                  onTap: () => _onItemTapped(4),
+                ),
               ],
             ),
           ),
@@ -180,7 +212,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 24),
       decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(24)),
-      child: Column(children: [Text(value, style: GoogleFonts.playfairDisplay(fontSize: 32, fontWeight: FontWeight.bold, color: textColor)), Text(label, style: GoogleFonts.poppins(fontSize: 14, color: textColor.withOpacity(0.8)))]),
+      child: Column(
+        children: [
+          Text(value, style: GoogleFonts.playfairDisplay(fontSize: 32, fontWeight: FontWeight.bold, color: textColor)), 
+          Text(label, style: GoogleFonts.poppins(fontSize: 14, color: textColor.withOpacity(0.8)))
+        ],
+      ),
     );
   }
 
