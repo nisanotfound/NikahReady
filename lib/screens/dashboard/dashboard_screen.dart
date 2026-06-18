@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'settings_screen.dart';
-import '../quiz_screen.dart';
+import 'settings_screen.dart'; 
+import '../mahr/mahr_screen.dart';
 
+import '../checklist/checklist_screen.dart';
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
@@ -22,6 +23,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget _getSelectedScreen(int index) {
     switch (index) {
       case 0: return const Center(child: Text("Checklist (Akan Datang)")); 
+      case 1: return const MahrScreen();
+      case 0: return const ChecklistScreen(); // Skrin Checklist dipanggil di sini
       case 1: return const Center(child: Text("Mahr Calculator (Akan Datang)")); 
       case 2: return _buildMainDashboard(); 
       case 3: return const Center(child: Text("Plan (Akan Datang)")); 
@@ -59,7 +62,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: [
               _buildNavItem(icon: Icons.list_alt_rounded, label: 'List', index: 0),
               _buildNavItem(icon: Icons.calculate_outlined, label: 'Mahr', index: 1),
-              const SizedBox(width: 48),
+              const SizedBox(width: 48), 
               _buildNavItem(icon: Icons.calendar_today_outlined, label: 'Plan', index: 3),
               _buildNavItem(icon: Icons.help_outline_rounded, label: 'Quiz', index: 4),
             ],
@@ -95,6 +98,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
+
   Widget _buildMainDashboard() {
     return SingleChildScrollView(
       child: Column(
