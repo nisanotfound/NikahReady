@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart'; 
 import 'screens/auth/login_screen.dart';
+import 'services/wedding_provider.dart'; // Import fail provider anda
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,7 +13,15 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const NikahReadyApp());
+  // Aplikasi dibungkus dengan MultiProvider untuk mengaktifkan sistem Wedding Planner
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => WeddingProvider()),
+      ],
+      child: const NikahReadyApp(),
+    ),
+  );
 }
 
 class NikahReadyApp extends StatelessWidget {

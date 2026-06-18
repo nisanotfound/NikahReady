@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
 import 'settings_screen.dart'; 
+import 'package:nikahready/screens/planner_screen.dart';
+import 'package:nikahready/services/wedding_provider.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -10,7 +14,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  int _selectedIndex = 2; // Mula dengan tab Home (indeks 2)
+  int _selectedIndex = 2; // Starts on the Home tab (index 2)
 
   void _onItemTapped(int index) {
     setState(() {
@@ -20,29 +24,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _getSelectedScreen(int index) {
     switch (index) {
-      case 0: return const Center(child: Text("Checklist (Akan Datang)")); 
-      case 1: return const Center(child: Text("Mahr Calculator (Akan Datang)")); 
+      case 0: return const Center(child: Text("Checklist (Coming Soon)")); 
+      case 1: return const Center(child: Text("Mahr Calculator (Coming Soon)")); 
       case 2: return _buildMainDashboard(); 
-      case 3: return const Center(child: Text("Plan (Akan Datang)")); 
-      case 4: return const Center(child: Text("Quiz (Akan Datang)")); 
+      case 3: return const PlannerScreen(); 
+      case 4: return const Center(child: Text("Quiz (Coming Soon)")); 
       default: return _buildMainDashboard();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // Tentukan warna butang Home bergantung kepada adakah ia sedang aktif (indeks 2)
     final isHomeSelected = _selectedIndex == 2;
 
     return Scaffold(
       backgroundColor: const Color(0xFFFDFBFD),
       body: _getSelectedScreen(_selectedIndex),
       
-      // UBAH: Butang Home kini akan jadi kelabu jika tab lain ditekan
       floatingActionButton: FloatingActionButton(
         onPressed: () => _onItemTapped(2),
         backgroundColor: isHomeSelected ? const Color(0xFF9B7EBD) : Colors.grey.shade400,
-        elevation: isHomeSelected ? 4 : 0, // Buang bayang jika tidak aktif
+        elevation: isHomeSelected ? 4 : 0, 
         shape: const CircleBorder(), 
         child: const Icon(Icons.home_rounded, color: Colors.white, size: 32),
       ),
@@ -60,7 +62,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: [
               _buildNavItem(icon: Icons.list_alt_rounded, label: 'List', index: 0),
               _buildNavItem(icon: Icons.calculate_outlined, label: 'Mahr', index: 1),
-              const SizedBox(width: 48), // Ruang untuk Home
+              const SizedBox(width: 48), 
               _buildNavItem(icon: Icons.calendar_today_outlined, label: 'Plan', index: 3),
               _buildNavItem(icon: Icons.help_outline_rounded, label: 'Quiz', index: 4),
             ],
@@ -70,7 +72,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // Fungsi ini yang menukar warna ikon dan teks bila ditekan
   Widget _buildNavItem({required IconData icon, required String label, required int index}) {
     final isSelected = _selectedIndex == index;
     final color = isSelected ? const Color(0xFF9B7EBD) : Colors.grey.shade400;
@@ -98,8 +99,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // --- BAHAGIAN DASHBOARD UI ---
+  // --- MAIN DASHBOARD VIEW ---
   Widget _buildMainDashboard() {
+    // Read live values from the root stream wedding provider safely
+    final weddingProvider = context.watch<WeddingProvider>();
+    final daysLeft = weddingProvider.daysUntilWedding;
+    final countdownText = daysLeft != null ? "${daysLeft}d" : "42d";
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +131,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     IconButton(
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
-                      // UBAH: Saiz ikon dibesarkan dari 28 kepada 34 di sini
                       icon: const Icon(Icons.settings_outlined, color: Color(0xFF2C1B4D), size: 34),
                       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen())),
                     ),
@@ -153,9 +158,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
-                Row(children: [Expanded(child: _statBox("80%", "Spiritual", const Color(0xFFF1F1FE), const Color(0xFF5C4E9A))), const SizedBox(width: 16), Expanded(child: _statBox("65%", "Financial", const Color(0xFFFFF2F2), const Color(0xFFA95C5C)))]),
+                Row(
+                  children: [
+                    Expanded(child: _statBox("80%", "Spiritual", const Color(0xFFF1F1FE), const Color(0xFF5C4E9A))), 
+                    const SizedBox(width: 16), 
+                    Expanded(child: _statBox("65%", "Financial", const Color(0xFFFFF2F2), const Color(0xFFA95C5C)))
+                  ],
+                ),
                 const SizedBox(height: 16),
-                Row(children: [Expanded(child: _statBox("71%", "Personal", const Color(0xFFF1F9FE), const Color(0xFF3886A9))), const SizedBox(width: 16), Expanded(child: _statBox("42d", "To nikah", const Color(0xFFF1FEF4), const Color(0xFF257545)))]),
+                Row(
+                  children: [
+                    Expanded(child: _statBox("71%", "Personal", const Color(0xFFF1F9FE), const Color(0xFF3886A9))), 
+                    const SizedBox(width: 16), 
+                    // Dynamic metric countdown box bound to your Firestore instance
+                    Expanded(child: _statBox(countdownText, "To nikah", const Color(0xFFF1FEF4), const Color(0xFF257545)))
+                  ],
+                ),
               ],
             ),
           ),
@@ -166,9 +184,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               children: [
-                _actionRow(icon: Icons.checklist_rounded, title: "My checklist", subtitle: "3 tasks left", iconBg: const Color(0xFFF1F1FE), onTap: () => _onItemTapped(0)),
+                _actionRow(
+                  icon: Icons.checklist_rounded, 
+                  title: "My checklist", 
+                  subtitle: "${weddingProvider.tasks.where((t) => !t.isCompleted).length} tasks left", 
+                  iconBg: const Color(0xFFF1F1FE), 
+                  onTap: () => _onItemTapped(0),
+                ),
                 const SizedBox(height: 16),
-                _actionRow(icon: Icons.menu_book_rounded, title: "Today's quiz", subtitle: "Syarat nikah", iconBg: const Color(0xFFFFF2F2), onTap: () => _onItemTapped(4)),
+                _actionRow(
+                  icon: Icons.menu_book_rounded, 
+                  title: "Today's quiz", 
+                  subtitle: "Marriage conditions", 
+                  iconBg: const Color(0xFFFFF2F2), 
+                  onTap: () => _onItemTapped(4),
+                ),
               ],
             ),
           ),
@@ -182,7 +212,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 24),
       decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(24)),
-      child: Column(children: [Text(value, style: GoogleFonts.playfairDisplay(fontSize: 32, fontWeight: FontWeight.bold, color: textColor)), Text(label, style: GoogleFonts.poppins(fontSize: 14, color: textColor.withOpacity(0.8)))]),
+      child: Column(
+        children: [
+          Text(value, style: GoogleFonts.playfairDisplay(fontSize: 32, fontWeight: FontWeight.bold, color: textColor)), 
+          Text(label, style: GoogleFonts.poppins(fontSize: 14, color: textColor.withOpacity(0.8)))
+        ],
+      ),
     );
   }
 
