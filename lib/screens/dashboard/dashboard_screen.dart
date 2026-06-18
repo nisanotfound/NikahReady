@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart'; 
+
 import 'settings_screen.dart'; 
 import '../mahr/mahr_screen.dart';
 import '../checklist/checklist_screen.dart';
 import '../quiz_screen.dart';
-import '../planner_screen.dart'; // <-- 1. Import Planner ditambah di sini
+import '../planner_screen.dart'; 
+
 import '../../services/wedding_provider.dart';
+import '../../services/checklist_service.dart';
+import '../../models/checklist_model.dart';     
+import '../../providers/quiz_provider.dart'; 
+import '../../providers/mahr_provider.dart'; 
+import '../../providers/readiness_provider.dart'; 
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -29,7 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       case 0: return const ChecklistScreen();
       case 1: return const MahrScreen();
       case 2: return _buildMainDashboard();
-      case 3: return const PlannerScreen(); // <-- 2. Class Planner dipanggil di sini
+      case 3: return const PlannerScreen(); 
       case 4: return const QuizScreen();
       default: return _buildMainDashboard();
     }
@@ -103,107 +111,136 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _buildMainDashboard() {
     final weddingProvider = context.watch<WeddingProvider>();
+    final quizProvider = context.watch<QuizProvider>();
+    final mahrProvider = context.watch<MahrProvider>();
+    final readinessProvider = context.read<ReadinessProvider>(); 
+
     final daysLeft = weddingProvider.daysUntilWedding;
     final countdownText = daysLeft != null ? "${daysLeft}d" : "42d";
 
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(24, 60, 24, 40),
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFFEAF1FF), Color(0xFFFDE8F1)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+    // 4. Dapatkan User ID yang sedang login
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return const Center(child: CircularProgressIndicator()); 
+
+    final checklistService = ChecklistService(userId: user.uid);
+
+    // 5. Wrap (Bungkus) UI Dashboard dengan StreamBuilder supaya data Live
+    return StreamBuilder<List<ChecklistTask>>(
+      stream: checklistService.getTasks(),
+      builder: (context, snapshot) {
+        
+        // Kira Task dari Firebase
+        final tasks = snapshot.data ?? [];
+        final totalTasks = tasks.length;
+        final completedTasks = tasks.where((t) => t.isCompleted).length;
+
+        // Gunakan ReadinessProvider
+        final int spiritualScore = readinessProvider.calculateSpiritual(quizProvider.totalQuestions, quizProvider.correctCount);
+        final int financialScore = readinessProvider.calculateFinancial(mahrProvider.mahr.currentSavings, mahrProvider.mahr.targetMahr);
+        final int personalScore = readinessProvider.calculatePersonal(totalTasks, completedTasks);
+        
+        final int overallReadiness = readinessProvider.calculateOverall(spiritualScore, financialScore, personalScore);
+
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.fromLTRB(24, 60, 24, 40),
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xFFEAF1FF), Color(0xFFFDE8F1)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("NIKAHREADY", style: GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 2, color: const Color(0xFF8C79B6))),
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                      icon: const Icon(Icons.settings_outlined, color: Color(0xFF2C1B4D), size: 34),
-                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen())),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("NIKAHREADY", style: GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 2, color: const Color(0xFF8C79B6))),
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                          icon: const Icon(Icons.settings_outlined, color: Color(0xFF2C1B4D), size: 34),
+                          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen())),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Text("Your journey\nstarts here", style: GoogleFonts.playfairDisplay(fontSize: 38, fontWeight: FontWeight.bold, height: 1.1, color: const Color(0xFF2C1B4D))),
+                    const SizedBox(height: 24),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text("$overallReadiness", style: GoogleFonts.playfairDisplay(fontSize: 85, fontWeight: FontWeight.bold, color: const Color(0xFF9B7EBD), height: 1)),
+                        Padding(padding: const EdgeInsets.only(bottom: 12, left: 4), child: Text("%", style: GoogleFonts.playfairDisplay(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xFF9B7EBD)))),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Text("OVERALL READINESS", style: GoogleFonts.poppins(fontSize: 12, letterSpacing: 1.5, fontWeight: FontWeight.w500, color: const Color(0xFF9B7EBD))),
+                  ],
+                ),
+              ),
+              
+              const SizedBox(height: 24),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(child: _statBox("$spiritualScore%", "Spiritual", const Color(0xFFF1F1FE), const Color(0xFF5C4E9A))), 
+                        const SizedBox(width: 16), 
+                        Expanded(child: _statBox("$financialScore%", "Financial", const Color(0xFFFFF2F2), const Color(0xFFA95C5C)))
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(child: _statBox("$personalScore%", "Personal", const Color(0xFFF1F9FE), const Color(0xFF3886A9))), 
+                        const SizedBox(width: 16), 
+                        Expanded(child: _statBox(countdownText, "To nikah", const Color(0xFFF1FEF4), const Color(0xFF257545)))
+                      ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
-                Text("Your journey\nstarts here", style: GoogleFonts.playfairDisplay(fontSize: 38, fontWeight: FontWeight.bold, height: 1.1, color: const Color(0xFF2C1B4D))),
-                const SizedBox(height: 24),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+              ),
+
+              const SizedBox(height: 24),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
                   children: [
-                    Text("72", style: GoogleFonts.playfairDisplay(fontSize: 85, fontWeight: FontWeight.bold, color: const Color(0xFF9B7EBD), height: 1)),
-                    Padding(padding: const EdgeInsets.only(bottom: 12, left: 4), child: Text("%", style: GoogleFonts.playfairDisplay(fontSize: 40, fontWeight: FontWeight.bold, color: const Color(0xFF9B7EBD)))),
+                    _actionRow(
+                      icon: Icons.checklist_rounded, 
+                      title: "My checklist", 
+                      subtitle: "${totalTasks - completedTasks} tasks left", 
+                      iconBg: const Color(0xFFF1F1FE), 
+                      onTap: () => _onItemTapped(0),
+                    ),
+                    const SizedBox(height: 16),
+                    _actionRow(
+                      icon: Icons.menu_book_rounded, 
+                      title: "Today's quiz", 
+                      subtitle: "Marriage conditions", 
+                      iconBg: const Color(0xFFFFF2F2), 
+                      onTap: () => _onItemTapped(4),
+                    ),
                   ],
                 ),
-                const SizedBox(height: 4),
-                Text("OVERALL READINESS", style: GoogleFonts.poppins(fontSize: 12, letterSpacing: 1.5, fontWeight: FontWeight.w500, color: const Color(0xFF9B7EBD))),
-              ],
-            ),
+              ),
+              const SizedBox(height: 120),
+            ],
           ),
-          
-          const SizedBox(height: 24),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(child: _statBox("80%", "Spiritual", const Color(0xFFF1F1FE), const Color(0xFF5C4E9A))), 
-                    const SizedBox(width: 16), 
-                    Expanded(child: _statBox("65%", "Financial", const Color(0xFFFFF2F2), const Color(0xFFA95C5C)))
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(child: _statBox("71%", "Personal", const Color(0xFFF1F9FE), const Color(0xFF3886A9))), 
-                    const SizedBox(width: 16), 
-                    Expanded(child: _statBox(countdownText, "To nikah", const Color(0xFFF1FEF4), const Color(0xFF257545)))
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 24),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-                _actionRow(
-                  icon: Icons.checklist_rounded, 
-                  title: "My checklist", 
-                  subtitle: "${weddingProvider.tasks.where((t) => !t.isCompleted).length} tasks left", 
-                  iconBg: const Color(0xFFF1F1FE), 
-                  onTap: () => _onItemTapped(0),
-                ),
-                const SizedBox(height: 16),
-                _actionRow(
-                  icon: Icons.menu_book_rounded, 
-                  title: "Today's quiz", 
-                  subtitle: "Marriage conditions", 
-                  iconBg: const Color(0xFFFFF2F2), 
-                  onTap: () => _onItemTapped(4),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 40),
-        ],
-      ),
+        );
+      }
     );
   }
 
@@ -214,7 +251,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: Column(
         children: [
           Text(value, style: GoogleFonts.playfairDisplay(fontSize: 32, fontWeight: FontWeight.bold, color: textColor)), 
-          Text(label, style: GoogleFonts.poppins(fontSize: 14, color: textColor.withValues(alpha: 0.8))) // <-- 3. Dibetulkan (withValues)
+          Text(label, style: GoogleFonts.poppins(fontSize: 14, color: textColor.withValues(alpha: 0.8)))
         ],
       ),
     );
@@ -229,7 +266,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           color: Colors.white, 
           borderRadius: BorderRadius.circular(24), 
           boxShadow: [
-            BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 15, offset: const Offset(0, 8)) // <-- 3. Dibetulkan (withValues)
+            BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 15, offset: const Offset(0, 8))
           ]
         ),
         child: Row(

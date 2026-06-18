@@ -3,7 +3,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart'; 
 import 'screens/auth/login_screen.dart';
-import 'services/wedding_provider.dart'; // Import fail provider anda
+import 'services/wedding_provider.dart'; 
+import 'providers/readiness_provider.dart';
+import 'providers/quiz_provider.dart'; // <-- 1. Import QuizProvider ditambah
+import 'providers/mahr_provider.dart'; // <-- 2. Import MahrProvider ditambah
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,11 +16,13 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Aplikasi dibungkus dengan MultiProvider untuk mengaktifkan sistem Wedding Planner
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => WeddingProvider()),
+        ChangeNotifierProvider(create: (_) => QuizProvider()), // <-- 3. QuizProvider didaftarkan
+        ChangeNotifierProvider(create: (_) => MahrProvider()), // <-- 4. MahrProvider didaftarkan
+        ChangeNotifierProvider(create: (_) => ReadinessProvider()),
       ],
       child: const NikahReadyApp(),
     ),
