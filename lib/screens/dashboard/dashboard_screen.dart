@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'settings_screen.dart'; 
-
+import '../checklist/checklist_screen.dart';
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
@@ -20,7 +20,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _getSelectedScreen(int index) {
     switch (index) {
-      case 0: return const Center(child: Text("Checklist (Akan Datang)")); 
+      case 0: return const ChecklistScreen(); // Skrin Checklist dipanggil di sini
       case 1: return const Center(child: Text("Mahr Calculator (Akan Datang)")); 
       case 2: return _buildMainDashboard(); 
       case 3: return const Center(child: Text("Plan (Akan Datang)")); 
@@ -31,18 +31,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Tentukan warna butang Home bergantung kepada adakah ia sedang aktif (indeks 2)
     final isHomeSelected = _selectedIndex == 2;
 
     return Scaffold(
       backgroundColor: const Color(0xFFFDFBFD),
       body: _getSelectedScreen(_selectedIndex),
       
-      // UBAH: Butang Home kini akan jadi kelabu jika tab lain ditekan
       floatingActionButton: FloatingActionButton(
         onPressed: () => _onItemTapped(2),
         backgroundColor: isHomeSelected ? const Color(0xFF9B7EBD) : Colors.grey.shade400,
-        elevation: isHomeSelected ? 4 : 0, // Buang bayang jika tidak aktif
+        elevation: isHomeSelected ? 4 : 0,
         shape: const CircleBorder(), 
         child: const Icon(Icons.home_rounded, color: Colors.white, size: 32),
       ),
@@ -60,7 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: [
               _buildNavItem(icon: Icons.list_alt_rounded, label: 'List', index: 0),
               _buildNavItem(icon: Icons.calculate_outlined, label: 'Mahr', index: 1),
-              const SizedBox(width: 48), // Ruang untuk Home
+              const SizedBox(width: 48), 
               _buildNavItem(icon: Icons.calendar_today_outlined, label: 'Plan', index: 3),
               _buildNavItem(icon: Icons.help_outline_rounded, label: 'Quiz', index: 4),
             ],
@@ -70,7 +68,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // Fungsi ini yang menukar warna ikon dan teks bila ditekan
   Widget _buildNavItem({required IconData icon, required String label, required int index}) {
     final isSelected = _selectedIndex == index;
     final color = isSelected ? const Color(0xFF9B7EBD) : Colors.grey.shade400;
@@ -98,7 +95,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // --- BAHAGIAN DASHBOARD UI ---
   Widget _buildMainDashboard() {
     return SingleChildScrollView(
       child: Column(
@@ -125,7 +121,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     IconButton(
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(),
-                      // UBAH: Saiz ikon dibesarkan dari 28 kepada 34 di sini
                       icon: const Icon(Icons.settings_outlined, color: Color(0xFF2C1B4D), size: 34),
                       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen())),
                     ),
