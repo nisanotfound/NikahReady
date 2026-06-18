@@ -28,7 +28,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       case 1: return const Center(child: Text("Mahr Calculator (Akan Datang)")); 
       case 2: return _buildMainDashboard(); 
       case 3: return const Center(child: Text("Plan (Akan Datang)")); 
-      case 4: return const Center(child: Text("Quiz (Akan Datang)")); 
+      case 4: return const QuizScreen();
       default: return _buildMainDashboard();
     }
   }
@@ -176,7 +176,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
-
   Widget _statBox(String value, String label, Color bgColor, Color textColor) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 24),
