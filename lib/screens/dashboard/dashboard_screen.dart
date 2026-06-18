@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'settings_screen.dart'; 
+import '../mahr/mahr_screen.dart';
+
 import '../checklist/checklist_screen.dart';
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -20,6 +22,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   Widget _getSelectedScreen(int index) {
     switch (index) {
+      case 0: return const Center(child: Text("Checklist (Akan Datang)")); 
+      case 1: return const MahrScreen();
       case 0: return const ChecklistScreen(); // Skrin Checklist dipanggil di sini
       case 1: return const Center(child: Text("Mahr Calculator (Akan Datang)")); 
       case 2: return _buildMainDashboard(); 
