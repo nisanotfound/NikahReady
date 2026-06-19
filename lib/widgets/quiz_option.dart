@@ -54,8 +54,7 @@ class QuizOption extends StatelessWidget {
         trailingIcon = null;
         break;
       case OptionState.idle:
-      default:
-        bgColor     = Colors.white;
+      bgColor     = Colors.white;
         borderColor = const Color(0xFFD8CCE8);
         textColor   = const Color(0xFF2C1B4D);
         labelBg     = _kPrimary;

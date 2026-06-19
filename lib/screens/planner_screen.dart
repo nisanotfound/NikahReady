@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
-import '../../models/wedding_models.dart';
 import '../../services/wedding_provider.dart';
 import '../../widgets/wedding_dialogs.dart';
 
